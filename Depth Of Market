@@ -223,19 +223,12 @@ var table domTable                  = table.new(position.top_right, 17, sizeInpu
 // ── Watermark ──
 var label watermark = na
 
-if barstate.islast
-    label.delete(watermark)
-    watermark := label.new(
-        bar_index,
-        high,
-        "PrimeVIPDemon DOM v1.0\nModified by PrimeVIPDemon",
-        textcolor = color.silver,
-        style = label.style_label_down,
-        bgcolor = color.new(color.black, 80)
-    )
+
 //---------------------------------------------------------------------------------------------------------------------}
 //USER-DEFINED FUNCTIONS
 //---------------------------------------------------------------------------------------------------------------------{
+
+
 // @function            helper function to clear all storages (DOM maps & time&sales array)
 // @returns             void
 clearDom() =>
@@ -698,6 +691,12 @@ drawTable() =>
                 monospaceCell(15,row,EM_SPACE+parseData(timeSales.get(index).price,format.mintick),timeSales.get(index).colorNow)                
                 monospaceCell(16,row,parseData(timeSales.get(index).size))
             
+// ── Watermark Execution ──
+if barstate.islast
+    label.delete(watermark)
+    watermark := label.new(bar_index, high, "PrimeVIPDemon DOM v1.0", color=color.new(color.black, 80), textcolor=color.silver, style=label.style_label_down)
+
+
 //---------------------------------------------------------------------------------------------------------------------}
 //MUTABLE VARIABLES & EXECUTION
 //---------------------------------------------------------------------------------------------------------------------{
